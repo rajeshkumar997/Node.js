@@ -78,28 +78,52 @@
 
 //  CRUD with file System  (L-14)
 
-const fs = require("fs");
-const path = require("path");
+// const fs = require("fs");
+// const path = require("path");
 
-const dirPath = path.join(__dirname, 'crud');
-const filePath = `${dirPath}/apple.txt`;
+// const dirPath = path.join(__dirname, 'crud');
+// const filePath = `${dirPath}/apple.txt`;
 
-fs.writeFileSync(filePath, "this is a simple text file");
+// fs.writeFileSync(filePath, "this is a simple text file");
 
-fs.readFile(filePath, 'utf8', (err, item) => {
-    console.log(item);
+// fs.readFile(filePath, 'utf8', (err, item) => {
+//     console.log(item);
+// })
+
+// fs.appendFile(filePath, 'and file name is apple.txt', (err) => {
+//     if (!err) {
+//         console.log("file is updated");
+//     }
+// })
+
+// fs.rename(filePath, `${dirPath}/fruit.txt`, (err) => {
+//     if (!err) {
+//         console.log("file is updated");
+//     }
+// })
+
+// fs.unlinkSync(`${dirPath}/fruit.txt`)
+
+
+//////////////////////////////////////////////////////////////
+
+//         Asynchronous basics in Node js /////////   [L-15+16]
+
+console.log("Start time");
+setTimeout(() => {
+    console.log("I am printed after 3 seconds");
+}, 3000)
+console.log("end time");
+
+let a = 20;
+let b = 0;
+
+let waitingData = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(30)
+    }, 2000)
 })
-
-fs.appendFile(filePath, 'and file name is apple.txt', (err) => {
-    if (!err) {
-        console.log("file is updated");
-    }
+waitingData.then((data) => {
+    b = data;
+    console.log(a + b)
 })
-
-fs.rename(filePath, `${dirPath}/fruit.txt`, (err) => {
-    if (!err) {
-        console.log("file is updated");
-    }
-})
-
-fs.unlinkSync(`${dirPath}/fruit.txt`)

@@ -172,29 +172,44 @@
 
 ///// Render HTML and JSON /////////   [L-20]
 
+// const express = require("express");
+// const app = express();
+
+// app.get('', (req, res) => {
+//     res.send(`
+//     <h1>hello this is home page</h1>
+//     <a href="/about">Go to about page</a>
+//     `);
+// })
+
+// app.get('/about', (req, res) => {
+//     res.send(`
+//     <input type="text" placeholder="user-name" />
+//     <button>Click Me</button>
+//     `);
+// })
+
+// app.get('/json', (req, res) => {
+//     res.send({
+//         name: "Rajesh",
+//         age: 25,
+//         city: "Bangalore"
+//     });
+// })
+
+// app.listen(5000);
+
+///////////////////////////////////////////////////////////////////////
+
+// ......................  Make HTML pages .................
+
+// make folder for html file and access it, make html files, load html files
+
 const express = require("express");
+const path = require("path");
+
 const app = express();
+const publicPath = path.join(__dirname, 'public')
+app.use(express.static(publicPath))
 
-app.get('', (req, res) => {
-    res.send(`
-    <h1>hello this is home page</h1>
-    <a href="/about">Go to about page</a>
-    `);
-})
-
-app.get('/about', (req, res) => {
-    res.send(`
-    <input type="text" placeholder="user-name" />
-    <button>Click Me</button>
-    `);
-})
-
-app.get('/json', (req, res) => {
-    res.send({
-        name: "Rajesh",
-        age: 25,
-        city: "Bangalore"
-    });
-})
-
-app.listen(5000);
+app.listen(5000)

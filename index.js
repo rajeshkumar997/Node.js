@@ -221,18 +221,47 @@
 
 // apply get method, remove an extension from url, make 404 page, apply 404 page
 
+// const express = require("express");
+// const path = require("path");
+
+// const app = express();
+// const publicPath = path.join(__dirname, 'public')
+
+// app.get('', (req, res) => {
+//     res.sendFile(`${publicPath}/home.html`)
+// })
+
+// app.get('*', (req, res) => {
+//     res.sendFile(`${publicPath}/error.html`)
+// })
+
+// app.listen(5000)
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+// ...........................  Template Engine ....................................
+
+// setup dynamic routing , make dynamic page
+
 const express = require("express");
 const path = require("path");
 
 const app = express();
 const publicPath = path.join(__dirname, 'public')
 
+app.set('view engine', 'ejs')  //first parameter is view engine and second template engine ejs
+
 app.get('', (req, res) => {
     res.sendFile(`${publicPath}/home.html`)
 })
 
-app.get('*', (req, res) => {
-    res.sendFile(`${publicPath}/error.html`)
+app.get('/profile', (req, res) => {
+    const user = {
+        name: "Ahmed",
+        age: 25,
+        job: "Software Developer",
+    }
+    res.render('profile', { user })
 })
 
 app.listen(5000)

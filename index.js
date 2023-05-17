@@ -205,11 +205,34 @@
 
 // make folder for html file and access it, make html files, load html files
 
+// const express = require("express");
+// const path = require("path");
+
+// const app = express();
+// const publicPath = path.join(__dirname, 'public')
+// app.use(express.static(publicPath))
+
+// app.listen(5000)
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+// ......... Remove exptension from url ...................[L-22]
+
+// apply get method, remove an extension from url, make 404 page, apply 404 page
+
 const express = require("express");
 const path = require("path");
 
 const app = express();
 const publicPath = path.join(__dirname, 'public')
-app.use(express.static(publicPath))
+
+app.get('', (req, res) => {
+    res.sendFile(`${publicPath}/home.html`)
+})
+
+app.get('*', (req, res) => {
+    res.sendFile(`${publicPath}/error.html`)
+})
 
 app.listen(5000)

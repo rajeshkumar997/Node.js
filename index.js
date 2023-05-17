@@ -109,21 +109,60 @@
 
 //         Asynchronous basics in Node js /////////   [L-15+16]
 
-console.log("Start time");
-setTimeout(() => {
-    console.log("I am printed after 3 seconds");
-}, 3000)
-console.log("end time");
+// console.log("Start time");
+// setTimeout(() => {
+//     console.log("I am printed after 3 seconds");
+// }, 3000)
+// console.log("end time");
 
-let a = 20;
-let b = 0;
+// let a = 20;
+// let b = 0;
 
-let waitingData = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve(30)
-    }, 2000)
+// let waitingData = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve(30)
+//     }, 2000)
+// })
+// waitingData.then((data) => {
+//     b = data;
+//     console.log(a + b)
+// })
+
+////////////////////////////////////////////////////////////////////
+
+//   How Node js works //////////       [L-17]
+
+// call stack, node API, callBack Queue == Event Loop
+
+// console.log("starting");
+
+// setTimeout(() => {
+//     console.log("2 second log");
+// }, 2000);
+
+// setTimeout(() => {
+//     console.log("0 second log");
+// }, 0);
+
+// console.log("finishing");
+
+
+////////////////////////////////////////////////////////////////////////////
+
+//////////////             Express Js                      ////////////////////
+
+// it is a framework of node.js
+
+const express = require("express");
+const app = express();
+
+app.get('', (req, res) => {
+    console.log("data sent by browser =>>> ", req.query.name);
+    res.send('hello this is home page');
 })
-waitingData.then((data) => {
-    b = data;
-    console.log(a + b)
+
+app.get('/about', (req, res) => {
+    res.send('hello this is about page');
 })
+
+app.listen(5000);

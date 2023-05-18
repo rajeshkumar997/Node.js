@@ -264,4 +264,15 @@ app.get('/profile', (req, res) => {
     res.render('profile', { user })
 })
 
+app.get('/login', (req, res) => {
+    res.render('login');
+})
+
 app.listen(5000)
+
+///////////////////////////////////////////////////////////////////////////////
+
+// ................     Dynamic pages     ....................... [L-24]
+
+// How to make Loop in ejs, Make header file,  show common header file
+

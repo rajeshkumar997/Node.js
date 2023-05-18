@@ -243,36 +243,108 @@
 
 // setup dynamic routing , make dynamic page
 
-const express = require("express");
-const path = require("path");
+// const express = require("express");
+// const path = require("path");
 
-const app = express();
-const publicPath = path.join(__dirname, 'public')
+// const app = express();
+// const publicPath = path.join(__dirname, 'public')
 
-app.set('view engine', 'ejs')  //first parameter is view engine and second template engine ejs
+// app.set('view engine', 'ejs')  //first parameter is view engine and second template engine ejs
 
-app.get('', (req, res) => {
-    res.sendFile(`${publicPath}/home.html`)
-})
+// app.get('', (req, res) => {
+//     res.sendFile(`${publicPath}/home.html`)
+// })
 
-app.get('/profile', (req, res) => {
-    const user = {
-        name: "Ahmed",
-        age: 25,
-        job: "Software Developer",
-    }
-    res.render('profile', { user })
-})
+// app.get('/profile', (req, res) => {
+//     const user = {
+//         name: "Ahmed",
+//         age: 25,
+//         job: "Software Developer",
+//     }
+//     res.render('profile', { user })
+// })
 
-app.get('/login', (req, res) => {
-    res.render('login');
-})
+// app.get('/login', (req, res) => {
+//     res.render('login');
+// })
 
-app.listen(5000)
+// app.listen(5000)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-// ................     Dynamic pages     ....................... [L-24]
+// ................     Middleware     ....................... [L-25]
 
-// How to make Loop in ejs, Make header file,  show common header file
+// what is middlewares, how to make a middleware , apply middleware on routes , types of middlewares
 
+// const express = require('express');
+// const app = express();
+
+// const reqFilter = (req, res, next) => {
+//     if (!req.query.age) {
+//         res.send("Please provide age")
+//     }
+//     else if (req.query.age < 18) {
+//         res.send("You can not access the page")
+//     }
+//     else {
+//         next();
+
+//     }
+// }
+
+// app.use(reqFilter);
+
+// app.get('/', (req, res) => {
+//     res.send('Hello World ! Welcome to home page');
+// })
+
+// app.get('/user', (req, res) => {
+//     res.send('Hello World ! Welcome to user page');
+// })
+
+// app.listen(5000)
+
+///////////////////////////////////////////////////////////////////////////////
+
+//...........................  Route Level Middleware .........................[L-26]
+
+// Route level middlewre, applu middleware on singlr route, make middleware in diferent file, apply middleware in group of route
+
+const express = require('express');
+const app = express();
+const route = express.Router();
+
+const reqFilter = (req, res, next) => {
+    if (!req.query.age) {
+        res.send("Please provide age")
+    }
+    else if (req.query.age < 18) {
+        res.send("You can not access the page")
+    }
+    else {
+        next();
+
+    }
+}
+
+route.use(reqFilter);
+
+app.get('/', (req, res) => { //if we dont want to apply middleware then do like this (app.get)
+    res.send('Hello World ! Welcome to home page');
+})
+
+// app.get('/user', reqFilter, (req, res) => {     ////  I want to restrict only one page (apply middlewar on single route)
+//     res.send('Hello World ! Welcome to user page');
+// })
+
+route.get('/about', (req, res) => { // if we want to apply middleware then do like this (route.get)
+    res.send('Hello World ! Welcome to about page');
+})
+
+route.get('/contact', (req, res) => {
+    res.send('Hello World ! Welcome to contact page');
+})
+
+app.use('/', route);
+
+app.listen(5000)

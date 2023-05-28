@@ -365,19 +365,39 @@
 
 /////// CRUD operation in node /////////
 
-const fs = require("fs");
+// const fs = require("fs");
 
-fs.mkdirSync("thapa")
+// fs.mkdirSync("thapa")
 
-fs.writeFileSync("thapa/bio.txt", "this is bio page");
+// fs.writeFileSync("thapa/bio.txt", "this is bio page");
 
-fs.appendFileSync("thapa/bio.txt", "this is bio page and i append some text");
+// fs.appendFileSync("thapa/bio.txt", "this is bio page and i append some text");
 
-const data = fs.readFileSync("thapa/bio.txt");
-console.log(data.toString());
+// const data = fs.readFileSync("thapa/bio.txt");
+// console.log(data.toString());
 
-fs.renameSync("thapa/bio.txt", "thapa/mybio.txt")
+// fs.renameSync("thapa/bio.txt", "thapa/mybio.txt")
 
-fs.unlinkSync("thapa/mybio.txt")
+// fs.unlinkSync("thapa/mybio.txt")
 
-fs.rmdirSync("thapa")
+// fs.rmdirSync("thapa")
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+//////Synchronous V/S Asynchronous //////////
+
+const fs = require('fs');
+
+//////synchronous
+
+const data = fs.readFileSync("files/apple0.txt", 'utf-8')
+console.log(data);
+console.log("after the data");
+
+/////Asynchronous
+
+fs.readFile("files/apple0.txt", 'utf-8', (err, data) => {
+    console.log(data);
+})
+console.log("after the data");

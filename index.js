@@ -310,41 +310,74 @@
 
 // Route level middlewre, applu middleware on singlr route, make middleware in diferent file, apply middleware in group of route
 
-const express = require('express');
-const app = express();
-const route = express.Router();
+// const express = require('express');
+// const app = express();
+// const route = express.Router();
 
-const reqFilter = (req, res, next) => {
-    if (!req.query.age) {
-        res.send("Please provide age")
-    }
-    else if (req.query.age < 18) {
-        res.send("You can not access the page")
-    }
-    else {
-        next();
+// const reqFilter = (req, res, next) => {
+//     if (!req.query.age) {
+//         res.send("Please provide age")
+//     }
+//     else if (req.query.age < 18) {
+//         res.send("You can not access the page")
+//     }
+//     else {
+//         next();
 
-    }
-}
+//     }
+// }
 
-route.use(reqFilter);
+// route.use(reqFilter);
 
-app.get('/', (req, res) => { //if we dont want to apply middleware then do like this (app.get)
-    res.send('Hello World ! Welcome to home page');
-})
-
-// app.get('/user', reqFilter, (req, res) => {     ////  I want to restrict only one page (apply middlewar on single route)
-//     res.send('Hello World ! Welcome to user page');
+// app.get('/', (req, res) => { //if we dont want to apply middleware then do like this (app.get)
+//     res.send('Hello World ! Welcome to home page');
 // })
 
-route.get('/about', (req, res) => { // if we want to apply middleware then do like this (route.get)
-    res.send('Hello World ! Welcome to about page');
-})
+// // app.get('/user', reqFilter, (req, res) => {     ////  I want to restrict only one page (apply middlewar on single route)
+// //     res.send('Hello World ! Welcome to user page');
+// // })
 
-route.get('/contact', (req, res) => {
-    res.send('Hello World ! Welcome to contact page');
-})
+// route.get('/about', (req, res) => { // if we want to apply middleware then do like this (route.get)
+//     res.send('Hello World ! Welcome to about page');
+// })
 
-app.use('/', route);
+// route.get('/contact', (req, res) => {
+//     res.send('Hello World ! Welcome to contact page');
+// })
 
-app.listen(5000)
+// app.use('/', route);
+
+// app.listen(5000)
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+//.........   CRUD Operation in MongoDB............. [L-29]
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////// CRUD operation in node /////////
+
+const fs = require("fs");
+
+fs.mkdirSync("thapa")
+
+fs.writeFileSync("thapa/bio.txt", "this is bio page");
+
+fs.appendFileSync("thapa/bio.txt", "this is bio page and i append some text");
+
+const data = fs.readFileSync("thapa/bio.txt");
+console.log(data.toString());
+
+fs.renameSync("thapa/bio.txt", "thapa/mybio.txt")
+
+fs.unlinkSync("thapa/mybio.txt")
+
+fs.rmdirSync("thapa")
